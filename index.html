@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thinman Fitness System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef3f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #222;
+    }
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #007acc;
+      color: white;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #005f99;
+    }
+    .output, .tracker {
+      margin-top: 25px;
+      font-size: 17px;
+      color: #333;
+    }
+    .xp-bar {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.4);
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏋️‍♂️ Thinman Fitness System 🥋</h1>
+
+  <div class="button-container">
+    <button onclick="selectMode('Workout')">Workout Mode</button>
+    <button onclick="selectMode('Parent')">Parent Mode</button>
+    <button onclick="selectMode('Kickboxing')">Kickboxing</button>
+    <button onclick="selectMode('BJJ')">BJJ</button>
+    <button onclick="selectMode('MMA')">MMA</button>
+    <button onclick="selectMode('Track & Field')">Track & Field</button>
+    <button onclick="selectMode('Baseball')">Baseball</button>
+    <button onclick="selectMode('Hockey')">Hockey</button>
+    <button onclick="selectMode('Swimming')">Swimming</button>
+  </div>
+
+  <div class="output" id="outputBox">⬅️ Select a mode to begin</div>
+
+  <div class="tracker">
+    <h3>✅ Daily Tracker</h3>
+    <label><input type="checkbox" onchange="gainXP(5)"> Warm-up Complete</label><br/>
+    <label><input type="checkbox" onchange="gainXP(10)"> Skill Drill Done</label><br/>
+    <label><input type="checkbox" onchange="gainXP(15)"> Full Workout Finished</label>
+  </div>
+
+  <div class="xp-bar" id="xpBar">XP: 0 | Level: 1</div>
+
+  <script>
+    let xp = 0;
+    let level = 1;
+
+    function selectMode(mode) {
+      const workouts = {
+        "Workout": "Today's Full Body: Push-ups, Squats, Lunges, Sprints.",
+        "Parent": "Tips for Parents: Set daily goals, cheer effort, and track progress.",
+        "Kickboxing": "Drill: Jab-Cross-Hook, Footwork Circles, 3 Min Shadow Round.",
+        "BJJ": "Drill: Hip Escapes, Shrimp to Guard, Mount Escape Series.",
+        "MMA": "Combo Drill: Takedown + Ground and Pound + Get-up Technique.",
+        "Track & Field": "Drill: Sprint starts x5, Ladder drills, Long jump practice.",
+        "Baseball": "Drill: Batting stance reps, Grounders x20, Throw accuracy.",
+        "Hockey": "Drill: Skating figure 8s, Stick handling cones, Goalie shootout.",
+        "Swimming": "Drill: 4x freestyle laps, dolphin kicks, breathing control."
+      };
+
+      document.getElementById("outputBox").innerText = workouts[mode] || "Coming soon!";
+      gainXP(10); // Bonus XP for picking a workout
+    }
+
+    function gainXP(amount) {
+      xp += amount;
+      level = Math.floor(xp / 100) + 1;
+      document.getElementById("xpBar").innerText = `XP: ${xp} | Level: ${level}`;
+    }
+  </script>
+</body>
+</html>
